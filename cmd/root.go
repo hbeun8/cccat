@@ -1,19 +1,26 @@
 /*
 Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"os"
 	"fmt"
+	"io"
+	"log"
+	"os"
+
 	"github.com/spf13/cobra"
-	//"io"
+
 	//"log"
-	//"strings"
-	// "bufio"
+	"bufio"
+	"strings"
 )
 
+func ReadLine(in io.Reader) (string, error) {
+	out, err := bufio.NewReader(in).ReadString('\n')
+	out = strings.TrimSpace(out)
+	return out, err
+}
 	
 func check(e error) {
     if e != nil {
@@ -34,11 +41,21 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		for _, file := range args{
-			dat, err := os.ReadFile(file)
-    		check(err)
-    		fmt.Print(string(dat))
+		if args[0] == "-" {
+			reader:=bufio.NewReader(os.Stdin)
+			line, err := reader.ReadString('\n')
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Print(line)
+		} else {
+			for _, file := range args{
+				dat, err := os.ReadFile(file)
+    			check(err)
+    			fmt.Print(string(dat))
+			}
 		}
+		
 	 },
 }
 
