@@ -59,6 +59,18 @@ to quickly create a Cobra application.`,
 			if err := scanner.Err(); err != nil {
 				fmt.Fprintln(os.Stderr, "reading standard input:", err)
 			}
+		case "b":
+			scanner := bufio.NewScanner(os.Stdin)
+			i:=1
+			for scanner.Scan() {
+				fmt.Println(i, scanner.Text()) // Println will add back the final '\n'
+				if scanner.Text() == "" {
+				i++
+				}
+			}
+			if err := scanner.Err(); err != nil {
+				fmt.Fprintln(os.Stderr, "reading standard input:", err)
+			}
 		default: 
 			for _, file := range args{
 				dat, err := os.ReadFile(file)
