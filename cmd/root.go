@@ -63,9 +63,12 @@ to quickly create a Cobra application.`,
 			scanner := bufio.NewScanner(os.Stdin)
 			i:=1
 			for scanner.Scan() {
+				if scanner.Text() != "" {
 				fmt.Println(i, scanner.Text()) // Println will add back the final '\n'
-				if scanner.Text() == "" {
 				i++
+				}
+				if scanner.Text() == "" {
+				fmt.Println(scanner.Text()) // Println will add back the final '\n'
 				}
 			}
 			if err := scanner.Err(); err != nil {
