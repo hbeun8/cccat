@@ -41,21 +41,31 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		if args[0] == "-" {
+		switch args[0] {
+		case "-":
 			reader:=bufio.NewReader(os.Stdin)
 			line, err := reader.ReadString('\n')
 			if err != nil {
 				log.Fatal(err)
 			}
 			fmt.Print(line)
-		} else {
+		case "n":
+			scanner := bufio.NewScanner(os.Stdin)
+			i:=1
+			for scanner.Scan() {
+				fmt.Println(i, " ", scanner.Text()) // Println will add back the final '\n'
+				i++
+			}
+			if err := scanner.Err(); err != nil {
+				fmt.Fprintln(os.Stderr, "reading standard input:", err)
+			}
+		default: 
 			for _, file := range args{
 				dat, err := os.ReadFile(file)
     			check(err)
     			fmt.Print(string(dat))
 			}
 		}
-		
 	 },
 }
 
@@ -79,6 +89,7 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.Flags().BoolP("lines", "n", false, "count lines")
 }
 
 
