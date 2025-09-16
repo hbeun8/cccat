@@ -67,7 +67,7 @@ to quickly create a Cobra application.`,
 				fmt.Println(i, scanner.Text()) // Println will add back the final '\n'
 				i++
 				}
-				if scanner.Text() == "" {
+				if scanner.Text() == "" { 
 				fmt.Println(scanner.Text()) // Println will add back the final '\n'
 				}
 			}
