@@ -9,7 +9,7 @@ This project uses the cobra-cli.
 The project is organized into the following components:
 
 ```
-redis_workshop/
+cccat/
 ├── main.go               
 ├── test.txt
 ├── test2.txt
