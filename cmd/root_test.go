@@ -1,17 +1,12 @@
 package cmd
 
 import (
-	"errors"
-	//"time"
-	"fmt"
-	//"strings"
 	"testing"
 )
 
-
 // TestInsertValid calls map.Insert with a key value, checking
 // for a valid return value.
-func TestInsertValid(t *testing.T) {
+func TestCatNakedValid(t *testing.T) {
 	o := Object{datastore: []string{}}
     want := 1
     value, err := Insert(o, 1, "value")

@@ -1,26 +1,16 @@
-/*
-Copyright © 2025 NAME HERE <EMAIL ADDRESS>
-*/
+
 package cmd
 
 import (
 	"fmt"
-	"io"
+	//"io"
 	"log"
 	"os"
-
 	"github.com/spf13/cobra"
-
-	//"log"
 	"bufio"
-	"strings"
+	//"strings"
 )
 
-func ReadLine(in io.Reader) (string, error) {
-	out, err := bufio.NewReader(in).ReadString('\n')
-	out = strings.TrimSpace(out)
-	return out, err
-}
 	
 func check(e error) {
     if e != nil {
@@ -31,13 +21,10 @@ func check(e error) {
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "cccat",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Unix Command Line Tool CAT",
+	Long: `The cat utility reads files sequentially, writing them to the standard output.
+The file operands are processed in command-line order.  If file is a single
+dash (‘-’) or absent, cat reads from the standard input`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
@@ -104,7 +91,6 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	rootCmd.Flags().BoolP("lines", "n", false, "count lines")
 }
 
 
